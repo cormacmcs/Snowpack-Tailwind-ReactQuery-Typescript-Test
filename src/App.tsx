@@ -1,38 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { BrowserRouter } from 'react-router-dom';
+import RootNavigator from '@app/navigation/rootNavigator';
+import appRoutes from '@app/navigation/appRoutes';
+import { PageProvider, usePageDispatch, usePageState } from '@app/contexts/pageContext';
+import { Header } from '@app/elements/header';
 
-// Note: imports from src/tailwindcss-classnames, not the actual npm package. See compilerOptions.baseUrl in tsconfig.json
-import { classnames } from 'tailwindcss-classnames';
+// Useful way to use tailwind below
+// import { classnames } from 'tailwindcss-classnames';
+// const bg = classnames('bg-ch-pink'as any);
+// <p className={classnames(bg, 'text-black', 'p-4', 'rounded', 'mb-4')}></p>
 
-const bg = classnames('bg-ch-pink');
+const ShinyButton = () => {
+  const dispatch = usePageDispatch();
+  const { shiny } = usePageState();
 
+  return (
+    <span
+      className={`cursor-pointer ${shiny ? 'text-yellow-300' : 'text-white'}`}
+      onClick={() => dispatch({ type: 'toggleShiny' })}
+    >
+      Shiny
+    </span>
+  );
+};
 interface AppProps {}
 
 function App({}: AppProps) {
-  // Create the count state.
-  const [count, setCount] = useState(0);
-  // Create the counter (+1 every second).
-  useEffect(() => {
-    const timer = setTimeout(() => setCount(count + 1), 1000);
-    return () => clearTimeout(timer);
-  }, [count, setCount]);
-  // Return the App component.
+  const queryClient = new QueryClient();
   return (
-    <div className="App">
-      <header className="App-header">
-        <p className={classnames(bg, 'text-black', 'p-4', 'rounded', 'mb-4')}>Tailwind, with built-in tooling for custom configs</p>
-        <iframe
-          width="560"
-          height="315"
-          // Chopin - Complete Nocturnes (Brigitte Engerer)
-          src="https://www.youtube-nocookie.com/embed/liTSRH4fix4"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </header>
-    </div>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <PageProvider>
+          <div className='flex flex-col justify-start'>
+            <Header>
+              <h4>Pokemon</h4> <ShinyButton />
+            </Header>
+            <RootNavigator appRoutes={appRoutes} />
+          </div>
+        </PageProvider>
+      </QueryClientProvider>
+    </BrowserRouter>
   );
 }
 

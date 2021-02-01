@@ -5,9 +5,12 @@
     "target": "esnext",
     "moduleResolution": "node",
     "jsx": "preserve",
-    "baseUrl": "src",
+    "baseUrl": "./",
     /* paths - If you configure Snowpack import aliases, add them here. */
-    "paths": {},
+    "paths": {
+      "@app/*": ["./src/*"],
+      "@common/*": ["./src/common/*"]
+    },
     /* noEmit - Snowpack builds (emits) files, not tsc. */
     "noEmit": true,
     /* Additional Options */
@@ -16,6 +19,14 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "importsNotUsedAsValues": "error"
+    "lib": ["dom", "dom.iterable", "esnext", "es2015", "es2016", "es2017"],
+    "allowJs": true,
+    "esModuleInterop": true,
+    "noEmitHelpers": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "isolatedModules": true
   }
 }
