@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { usePokemonList } from '@app/queries/usePokemon';
 import { ActionButton, AltButton } from '@app/elements/buttons';
-import { usePageState, usePageDispatch } from '@app/contexts/pageContext';
+import { usePage } from '@app/contexts/pageContext';
 import PokemonView from '@app/components/pokemonView/pokemonView';
 
 interface IProps {}
@@ -10,8 +10,7 @@ interface IProps {}
 export default function DashboardPage(props: IProps) {
   const history = useHistory();
 
-  const { pageA: page, shiny } = usePageState();
-  const dispatch = usePageDispatch();
+  const [{ pageA: page, shiny }, dispatch] = usePage();
 
   const { pokemonList, status, error } = usePokemonList(page);
 

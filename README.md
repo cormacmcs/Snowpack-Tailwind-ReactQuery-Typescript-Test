@@ -1,10 +1,5 @@
 # Snowpack - Tailwind - React-Query - Typescript
 
-## Getting Started
-
-1. `yarn start`
-2. `yarn start`
-
 ## NPM Scripts
 
 - `start` will open a browser tab at [localhost:8080](http://localhost:8080)

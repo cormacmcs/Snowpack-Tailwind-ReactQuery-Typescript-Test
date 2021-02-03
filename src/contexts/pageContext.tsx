@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-type Action = { type: 'setA'; value: number } | { type: 'setB'; value: number } | { type: 'toggleShiny' };
-type Dispatch = (action: Action) => void;
-type State = { pageA: number; pageB: number; shiny: boolean };
 type PageProviderProps = { children: React.ReactNode };
+type Dispatch = (action: Action) => void;
+
+type Action = { type: 'setA'; value: number } | { type: 'setB'; value: number } | { type: 'toggleShiny' };
+type State = { pageA: number; pageB: number; shiny: boolean };
 
 const PageStateContext = React.createContext<State | undefined>(undefined);
 const PageDispatchContext = React.createContext<Dispatch | undefined>(undefined);
@@ -50,4 +51,8 @@ function usePageDispatch() {
   return context;
 }
 
-export { PageProvider, usePageState, usePageDispatch };
+function usePage(): [State, Dispatch] {
+  return [usePageState(), usePageDispatch()];
+}
+
+export { PageProvider, usePageState, usePageDispatch, usePage };
