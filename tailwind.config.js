@@ -9,7 +9,7 @@ module.exports = {
     },
   },
   variants: {
-    opacity: ({ after }) => after(['disabled']),
+    opacity: ['disabled'],
   },
   plugins: [],
 };

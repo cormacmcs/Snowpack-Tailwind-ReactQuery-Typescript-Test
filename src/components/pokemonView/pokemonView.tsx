@@ -13,11 +13,9 @@ const PokemonView = ({ pokemon, shiny }: { pokemon: any; shiny?: boolean }) => {
       <div>{pokemon.name}</div>
       {status === 'loading' && <div>...</div>}
       {status === 'success' && (
-        <img
-          width={60}
-          height={60}
-          src={shiny ? pokemonDetails?.sprites?.front_shiny : pokemonDetails?.sprites?.front_default}
-        />
+        <div className='h-16 w-16 flex justify-center items-center mx-4'>
+          <img src={shiny ? pokemonDetails?.sprites?.front_shiny : pokemonDetails?.sprites?.front_default} />
+        </div>
       )}
     </div>
   );

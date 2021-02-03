@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { usePokemonList } from '@app/queries/usePokemon';
-import { ActionButton } from '@app/elements/buttons';
+import { ActionButton, AltButton } from '@app/elements/buttons';
 import { usePageState, usePageDispatch } from '@app/contexts/pageContext';
 import PokemonView from '@app/components/pokemonView/pokemonView';
 
@@ -35,12 +35,12 @@ export default function DashboardPage(props: IProps) {
         <ActionButton id='btn' onClick={() => setPage(page + 1)}>
           Next Page
         </ActionButton>
-        <ActionButton id='btn' onClick={() => history.push('/b')}>
+        <AltButton id='btn' onClick={() => history.push('/b')}>
           Go to view B
-        </ActionButton>
+        </AltButton>
       </div>
 
-      <h5 className='mt-8 text-blue-500 font-bold'>Pokemon Dashboard A</h5>
+      <h5 className='my-8 text-blue-500 font-bold'>Pokemon Dashboard A</h5>
       <div className='grid grid-cols-5 items-center'>
         {pokemonList.map((pokemon) => (
           <PokemonView key={pokemon.name} pokemon={pokemon} shiny={shiny} />

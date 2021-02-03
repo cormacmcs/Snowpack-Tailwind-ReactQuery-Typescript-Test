@@ -6,11 +6,6 @@ import appRoutes from '@app/navigation/appRoutes';
 import { PageProvider, usePageDispatch, usePageState } from '@app/contexts/pageContext';
 import { Header } from '@app/elements/header';
 
-// Useful way to use tailwind below
-// import { classnames } from 'tailwindcss-classnames';
-// const bg = classnames('bg-ch-pink'as any);
-// <p className={classnames(bg, 'text-black', 'p-4', 'rounded', 'mb-4')}></p>
-
 const ShinyButton = () => {
   const dispatch = usePageDispatch();
   const { shiny } = usePageState();
