@@ -20,7 +20,7 @@ const WaitingComponent = (Component) => {
 export default function RootNavigator({ appRoutes, subMenus = [], admin = false }) {
   const routes = appRoutes.map((route) => checkRoute(route, subMenus, admin));
   return (
-    <div className='text-center'>
+    <div className='text-center h-full'>
       <Switch>
         {routes.map((route, index) => (
           <Route

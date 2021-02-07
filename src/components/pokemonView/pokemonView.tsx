@@ -9,7 +9,7 @@ const PokemonView = ({ pokemon, shiny }: { pokemon: any; shiny?: boolean }) => {
   }
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center dark:text-white'>
       <div>{pokemon.name}</div>
       {status === 'loading' && <div>...</div>}
       {status === 'success' && (

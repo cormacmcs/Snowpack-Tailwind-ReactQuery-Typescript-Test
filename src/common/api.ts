@@ -1,16 +1,9 @@
-// const {
-//   REACT_APP_TARGET_URL_ROOT,
-//   REACT_APP_TARGET_API_KEY
-// } = process.env;
-
-// const pokeAPI = 'https://pokeapi.co/api/v2/';
-
 const defaultHeaders = {
   'Content-Type': 'application/json',
 };
 
-const get = async (endpoint: string, headers?: Headers, options?: object) => {
-  return await fetch(endpoint, {
+const get = (endpoint: string, headers?: Headers, options?: object) => {
+  return fetch(endpoint, {
     method: 'GET',
     headers: {
       ...defaultHeaders,
@@ -25,8 +18,8 @@ const get = async (endpoint: string, headers?: Headers, options?: object) => {
   });
 };
 
-const del = async (endpoint: string, headers?: Headers, options?: object) => {
-  return await fetch(endpoint, {
+const del = (endpoint: string, headers?: Headers, options?: object) => {
+  return fetch(endpoint, {
     method: 'DELETE',
     headers: {
       ...defaultHeaders,
@@ -38,8 +31,8 @@ const del = async (endpoint: string, headers?: Headers, options?: object) => {
   });
 };
 
-const post = async (endpoint: string, body: any, headers?: Headers, options?: object) => {
-  return await fetch(endpoint, {
+const post = (endpoint: string, body: any, headers?: Headers, options?: object) => {
+  return fetch(endpoint, {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -52,8 +45,8 @@ const post = async (endpoint: string, body: any, headers?: Headers, options?: ob
   });
 };
 
-const put = async (endpoint: string, body: any, headers?: Headers, options?: object) => {
-  return await fetch(endpoint, {
+const put = (endpoint: string, body: any, headers?: Headers, options?: object) => {
+  return fetch(endpoint, {
     method: 'PUT',
     body: JSON.stringify(body),
     headers: {
@@ -66,8 +59,8 @@ const put = async (endpoint: string, body: any, headers?: Headers, options?: obj
   });
 };
 
-const patch = async (endpoint: string, body?: any, headers?: Headers, options?: object) => {
-  return await fetch(endpoint, {
+const patch = (endpoint: string, body?: any, headers?: Headers, options?: object) => {
+  return fetch(endpoint, {
     method: 'PATCH',
     body: body && JSON.stringify(body),
     headers: {
@@ -80,8 +73,8 @@ const patch = async (endpoint: string, body?: any, headers?: Headers, options?: 
   });
 };
 
-const download = async (endpoint: string, filename: string, headers?: Headers, options?: object) => {
-  return await fetch(endpoint, {
+const download = (endpoint: string, filename: string, headers?: Headers, options?: object) => {
+  return fetch(endpoint, {
     method: 'GET',
     headers: {
       ...defaultHeaders,

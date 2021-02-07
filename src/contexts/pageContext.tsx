@@ -3,8 +3,8 @@ import * as React from 'react';
 type PageProviderProps = { children: React.ReactNode };
 type Dispatch = (action: Action) => void;
 
-type Action = { type: 'setA'; value: number } | { type: 'setB'; value: number } | { type: 'toggleShiny' };
-type State = { pageA: number; pageB: number; shiny: boolean };
+type Action = { type: 'setA'; value: number } | { type: 'setB'; value: number };
+type State = { pageA: number; pageB: number };
 
 const PageStateContext = React.createContext<State | undefined>(undefined);
 const PageDispatchContext = React.createContext<Dispatch | undefined>(undefined);
@@ -17,9 +17,7 @@ function pageReducer(state: State, action: Action) {
     case 'setB': {
       return { ...state, pageB: action.value };
     }
-    case 'toggleShiny': {
-      return { ...state, shiny: !state.shiny };
-    }
+
     default: {
       throw new Error(`Unhandled action type`);
     }
@@ -27,7 +25,7 @@ function pageReducer(state: State, action: Action) {
 }
 
 function PageProvider({ children }: PageProviderProps) {
-  const [state, dispatch] = React.useReducer(pageReducer, { pageA: 0, pageB: 0, shiny: false });
+  const [state, dispatch] = React.useReducer(pageReducer, { pageA: 0, pageB: 0 });
   return (
     <PageStateContext.Provider value={state}>
       <PageDispatchContext.Provider value={dispatch}>{children}</PageDispatchContext.Provider>

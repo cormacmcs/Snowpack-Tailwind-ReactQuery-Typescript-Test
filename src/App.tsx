@@ -3,22 +3,42 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 import RootNavigator from '@app/navigation/rootNavigator';
 import appRoutes from '@app/navigation/appRoutes';
-import { PageProvider, usePageDispatch, usePageState } from '@app/contexts/pageContext';
+import { PageProvider } from '@app/contexts/pageContext';
+import { StyleProvider, useStyle, useStyleState } from '@app/contexts/styleContext';
+import CombineProviders from '@app/contexts/CombineProviders';
 import { Header } from '@app/elements/header';
 
-const ShinyButton = () => {
-  const dispatch = usePageDispatch();
-  const { shiny } = usePageState();
+const ShinyToggle = () => {
+  const [{ shiny }, dispatch] = useStyle();
 
   return (
     <span
-      className={`cursor-pointer ${shiny ? 'text-yellow-300' : 'text-white'}`}
+      className={`cursor-pointer mx-2 ${shiny ? 'text-yellow-300' : 'text-white'}`}
       onClick={() => dispatch({ type: 'toggleShiny' })}
     >
       Shiny
     </span>
   );
 };
+
+const DarkToggle = () => {
+  const [{ dark }, dispatch] = useStyle();
+
+  return (
+    <span
+      className={`cursor-pointer mx-2 ${dark ? 'text-gray-700' : 'text-white'}`}
+      onClick={() => dispatch({ type: 'toggleDark' })}
+    >
+      Dark
+    </span>
+  );
+};
+
+const AppWrapper = ({ children }: { children: React.ReactNode }) => {
+  const { dark } = useStyleState();
+  return <div className={`flex flex-col justify-start h-screen flex-grow ${dark ? 'dark' : ''}`}>{children}</div>;
+};
+
 interface AppProps {}
 
 function App({}: AppProps) {
@@ -26,14 +46,17 @@ function App({}: AppProps) {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <PageProvider>
-          <div className='flex flex-col justify-start'>
+        <CombineProviders providers={[PageProvider, StyleProvider]}>
+          <AppWrapper>
             <Header>
-              <h4>Pokemon</h4> <ShinyButton />
+              <h4>Pokemon</h4>
+              <div>
+                <ShinyToggle /> <DarkToggle />
+              </div>
             </Header>
             <RootNavigator appRoutes={appRoutes} />
-          </div>
-        </PageProvider>
+          </AppWrapper>
+        </CombineProviders>
       </QueryClientProvider>
     </BrowserRouter>
   );

@@ -3,14 +3,15 @@ import { useHistory } from 'react-router-dom';
 import { usePokemonList } from '@app/queries/usePokemon';
 import { ActionButton, AltButton } from '@app/elements/buttons';
 import { usePage } from '@app/contexts/pageContext';
+import { useStyleState } from '@app/contexts/styleContext';
 import PokemonView from '@app/components/pokemonView/pokemonView';
 
 interface IProps {}
 
 export default function DashboardPage(props: IProps) {
   const history = useHistory();
-
-  const [{ pageA: page, shiny }, dispatch] = usePage();
+  const { shiny } = useStyleState();
+  const [{ pageA: page }, dispatch] = usePage();
 
   const { pokemonList, status, error } = usePokemonList(page);
 
@@ -26,7 +27,7 @@ export default function DashboardPage(props: IProps) {
   };
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center h-full dark:bg-gray-800'>
       <div className='flex flex-row justify-between mt-8'>
         <ActionButton id='btn' onClick={() => setPage(Math.max(page - 1, 0))} disabled={page === 0}>
           Previous Page

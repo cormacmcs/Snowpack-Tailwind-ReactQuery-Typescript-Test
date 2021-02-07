@@ -26,7 +26,7 @@ export default function DashboardBPage(props: IProps) {
   };
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center h-full dark:bg-gray-800'>
       <div className='flex flex-row justify-between mt-8'>
         <ActionButton id='btn' onClick={() => setPage(Math.max(page - 1, 0))} disabled={page === 0}>
           Previous Page
