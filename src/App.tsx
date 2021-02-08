@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
-import RootNavigator from '@app/navigation/rootNavigator';
+import RouteNavigator from '@app/navigation/routeNavigator';
 import appRoutes from '@app/navigation/appRoutes';
 import { PageProvider } from '@app/contexts/pageContext';
 import { StyleProvider, useStyle, useStyleState } from '@app/contexts/styleContext';
@@ -54,7 +54,7 @@ function App({}: AppProps) {
                 <ShinyToggle /> <DarkToggle />
               </div>
             </Header>
-            <RootNavigator appRoutes={appRoutes} />
+            <RouteNavigator appRoutes={appRoutes} />
           </AppWrapper>
         </CombineProviders>
       </QueryClientProvider>

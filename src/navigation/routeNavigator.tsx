@@ -11,16 +11,16 @@ const checkRoute = (route, subMenus, admin) => {
 
 const WaitingComponent = (Component) => {
   return (props) => (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className='dark:text-white'>Loading...</div>}>
       <Component {...props} />
     </Suspense>
   );
 };
 
-export default function RootNavigator({ appRoutes, subMenus = [], admin = false }) {
+export default function routeNavigator({ appRoutes, subMenus = [], admin = false }) {
   const routes = appRoutes.map((route) => checkRoute(route, subMenus, admin));
   return (
-    <div className='text-center h-full'>
+    <div className='text-center h-full  dark:bg-gray-800'>
       <Switch>
         {routes.map((route, index) => (
           <Route

@@ -9,6 +9,8 @@ type State = { shiny: boolean; dark: boolean };
 const StyleStateContext = React.createContext<State | undefined>(undefined);
 const StyleDispatchContext = React.createContext<Dispatch | undefined>(undefined);
 
+const initialState: State = { shiny: false, dark: false };
+
 function styleReducer(state: State, action: Action) {
   switch (action.type) {
     case 'toggleShiny': {
@@ -24,7 +26,7 @@ function styleReducer(state: State, action: Action) {
 }
 
 function StyleProvider({ children }: StyleProviderProps) {
-  const [state, dispatch] = React.useReducer(styleReducer, { shiny: false, dark: false });
+  const [state, dispatch] = React.useReducer(styleReducer, initialState);
   return (
     <StyleStateContext.Provider value={state}>
       <StyleDispatchContext.Provider value={dispatch}>{children}</StyleDispatchContext.Provider>

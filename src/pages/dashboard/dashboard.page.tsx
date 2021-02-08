@@ -13,12 +13,13 @@ export default function DashboardPage(props: IProps) {
   const { shiny } = useStyleState();
   const [{ pageA: page }, dispatch] = usePage();
 
-  const { pokemonList, status, error } = usePokemonList(page);
+  const { pokemonList, isLoading, isError, isFetching, error } = usePokemonList(page);
 
-  if (status === 'loading') {
-    return <div>Loading</div>;
+  if (isLoading) {
+    return <div className='dark:text-white'>Loading</div>;
   }
-  if (status === 'error') {
+
+  if (isError) {
     return <div>{error.message}</div>;
   }
 
@@ -42,9 +43,8 @@ export default function DashboardPage(props: IProps) {
 
       <h5 className='my-8 text-blue-500 font-bold'>Pokemon Dashboard A</h5>
       <div className='grid grid-cols-5 items-center'>
-        {pokemonList.map((pokemon) => (
-          <PokemonView key={pokemon.name} pokemon={pokemon} shiny={shiny} />
-        ))}
+        {!isFetching &&
+          pokemonList.map((pokemon) => <PokemonView key={pokemon.name} pokemon={pokemon} shiny={shiny} />)}
       </div>
     </div>
   );

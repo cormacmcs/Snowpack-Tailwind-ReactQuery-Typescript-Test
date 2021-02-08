@@ -9,6 +9,8 @@ type State = { pageA: number; pageB: number };
 const PageStateContext = React.createContext<State | undefined>(undefined);
 const PageDispatchContext = React.createContext<Dispatch | undefined>(undefined);
 
+const initialState: State = { pageA: 0, pageB: 0 };
+
 function pageReducer(state: State, action: Action) {
   switch (action.type) {
     case 'setA': {
@@ -25,7 +27,7 @@ function pageReducer(state: State, action: Action) {
 }
 
 function PageProvider({ children }: PageProviderProps) {
-  const [state, dispatch] = React.useReducer(pageReducer, { pageA: 0, pageB: 0 });
+  const [state, dispatch] = React.useReducer(pageReducer, initialState);
   return (
     <PageStateContext.Provider value={state}>
       <PageDispatchContext.Provider value={dispatch}>{children}</PageDispatchContext.Provider>
