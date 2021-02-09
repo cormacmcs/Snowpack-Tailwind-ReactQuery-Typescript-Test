@@ -1,5 +1,6 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter } from 'react-router-dom';
 import RouteNavigator from '@app/navigation/routeNavigator';
 import appRoutes from '@app/navigation/appRoutes';
@@ -7,6 +8,8 @@ import { PageProvider } from '@app/contexts/pageContext';
 import { StyleProvider, useStyle, useStyleState } from '@app/contexts/styleContext';
 import CombineProviders from '@app/contexts/CombineProviders';
 import { Header } from '@app/elements/header';
+
+const queryClient = new QueryClient();
 
 const ShinyToggle = () => {
   const [{ shiny }, dispatch] = useStyle();
@@ -42,10 +45,10 @@ const AppWrapper = ({ children }: { children: React.ReactNode }) => {
 interface AppProps {}
 
 function App({}: AppProps) {
-  const queryClient = new QueryClient();
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
         <CombineProviders providers={[PageProvider, StyleProvider]}>
           <AppWrapper>
             <Header>
