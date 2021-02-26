@@ -4,8 +4,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter } from 'react-router-dom';
 import RouteNavigator from '@app/navigation/routeNavigator';
 import appRoutes from '@app/navigation/appRoutes';
-import { PageProvider } from '@app/contexts/pageContext';
-import { StyleProvider, useStyle, useStyleState } from '@app/contexts/styleContext';
+import { PageProvider } from '@app/contexts/pageContextB';
+import { StyleProvider, useStyle, useStyleState } from '@app/contexts/styleContextB';
 import CombineProviders from '@app/contexts/CombineProviders';
 import { Header } from '@app/elements/header';
 
@@ -37,9 +37,15 @@ const DarkToggle = () => {
   );
 };
 
+// const ToggleWithContext = ProvideContext(StyleProvider)(ShinyToggle);
+
 const AppWrapper = ({ children }: { children: React.ReactNode }) => {
   const { dark } = useStyleState();
-  return <div className={`flex flex-col justify-start h-screen flex-grow ${dark ? 'dark' : ''}`}>{children}</div>;
+  return (
+    <div className={`flex flex-col justify-start w-screen max-w-none h-screen flex-grow ${dark ? 'dark' : ''}`}>
+      {children}
+    </div>
+  );
 };
 
 interface AppProps {}

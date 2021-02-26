@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { usePokemonList } from '@app/queries/usePokemon';
 import { ActionButton, AltButton } from '@app/elements/buttons';
-import { usePage } from '@app/contexts/pageContext';
+import { usePage } from '@app/contexts/pageContextB';
 import PokemonView from '@app/components/pokemonView/pokemonView';
 
 interface IProps {}
@@ -10,9 +10,9 @@ interface IProps {}
 export default function DashboardBPage(props: IProps) {
   const history = useHistory();
 
-  const [{ pageB: page }, dispatch] = usePage();
+  const [{ pageB: page }, { setB: setPage }] = usePage();
 
-  const { pokemonList, isLoading, isError, isFetching, error } = usePokemonList(page);
+  const { pokemonList, isLoading, isError, isFetching, error } = usePokemonList(parseInt(page));
 
   if (isLoading) {
     return <div className='dark:text-white'>Loading</div>;
@@ -22,17 +22,17 @@ export default function DashboardBPage(props: IProps) {
     return <div>{error.message}</div>;
   }
 
-  const setPage = (page) => {
-    dispatch({ type: 'setB', value: page });
-  };
-
   return (
     <div className='flex flex-col items-center h-full dark:bg-gray-800'>
       <div className='flex flex-row justify-between mt-8'>
-        <ActionButton id='btn' onClick={() => setPage(Math.max(page - 1, 0))} disabled={page === 0}>
+        <ActionButton
+          id='btn'
+          onClick={() => setPage(JSON.stringify(Math.max(parseInt(page) - 1, 0)))}
+          disabled={parseInt(page) === 0}
+        >
           Previous Page
         </ActionButton>
-        <ActionButton id='btn' onClick={() => setPage(page + 1)}>
+        <ActionButton id='btn' onClick={() => setPage(JSON.stringify(parseInt(page) + 1))}>
           Next Page
         </ActionButton>
         <AltButton id='btn' onClick={() => history.push('/')}>

@@ -22,4 +22,14 @@ const CombineProviders: React.FC<Props> = ({ providers, children }) => {
   return createProvidersTree(providers, children);
 };
 
+// const Wrapper = ({ children }) => {
+//   return React.createElement(children);
+// };
+
+// export const ProvideContext = (Context) => (Component) => {
+//   // console.warn(props);
+//   return <Wrapper>{Context({ children: Component })}</Wrapper>;
+//   // return <Wrapper>{Context({ children: Component })}</Wrapper>;
+// };
+
 export default CombineProviders;

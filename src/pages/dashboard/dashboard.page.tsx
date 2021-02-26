@@ -2,8 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { usePokemonList } from '@app/queries/usePokemon';
 import { ActionButton, AltButton } from '@app/elements/buttons';
-import { usePage } from '@app/contexts/pageContext';
-import { useStyleState } from '@app/contexts/styleContext';
+import { usePage, PageProvider } from '@app/contexts/pageContextB';
+import { useStyleState, StyleProvider, useStyle } from '@app/contexts/styleContextB';
 import PokemonView from '@app/components/pokemonView/pokemonView';
 
 interface IProps {}
@@ -11,7 +11,7 @@ interface IProps {}
 export default function DashboardPage(props: IProps) {
   const history = useHistory();
   const { shiny } = useStyleState();
-  const [{ pageA: page }, dispatch] = usePage();
+  const [{ pageA: page }, { setA: setPage }] = usePage();
 
   const { pokemonList, isLoading, isError, isFetching, error } = usePokemonList(page);
 
@@ -22,10 +22,6 @@ export default function DashboardPage(props: IProps) {
   if (isError) {
     return <div>{error.message}</div>;
   }
-
-  const setPage = (page) => {
-    dispatch({ type: 'setA', value: page });
-  };
 
   return (
     <div className='flex flex-col items-center h-full dark:bg-gray-800'>
@@ -49,3 +45,7 @@ export default function DashboardPage(props: IProps) {
     </div>
   );
 }
+
+//  DashboardPage;
+
+// export default ProvideContext(StyleProvider)(DashboardPage);
