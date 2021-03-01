@@ -1,5 +1,7 @@
 import React from 'react';
 import { usePokemonDetails } from '@app/queries/usePokemon';
+import { ProvideContext } from '@app/react-provide-context';
+import { StyleProvider } from '@app/contexts/styleContextB';
 
 const PokemonView = ({ pokemon, shiny }: { pokemon: any; shiny?: boolean }) => {
   const { pokemonDetails, status, error } = usePokemonDetails(pokemon);
@@ -21,4 +23,5 @@ const PokemonView = ({ pokemon, shiny }: { pokemon: any; shiny?: boolean }) => {
   );
 };
 
-export default PokemonView;
+export default ProvideContext([StyleProvider])(React.memo(PokemonView));
+// export default PokemonView;

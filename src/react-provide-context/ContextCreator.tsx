@@ -1,10 +1,5 @@
 import * as React from 'react';
 
-interface MultiProviderProps {
-  providers: any[];
-}
-type Provider = ({ children }: { children: React.ReactNode }) => JSX.Element;
-
 type ContextProviderProps = { children: React.ReactNode };
 type Action = { type: string };
 type KeyFrom<X> = keyof X;
@@ -86,28 +81,6 @@ const CreateContext = <
   }
 
   return { ContextProvider, useContextState, useContextDispatch, useContextReducer, useContextActions, useContext };
-};
-
-const createProvidersStack = (providers: Provider[], children, props, index: number = 0) => {
-  const isFinalNode = index === providers.length - 1;
-  const component = providers[index];
-  if (!isFinalNode) {
-    return React.createElement(component, null, createProvidersStack(providers, children, props, ++index));
-  } else {
-    return React.createElement(component, {
-      ...(props || {}),
-      children,
-    });
-  }
-};
-
-export const MultiProvider: React.FC<MultiProviderProps> = ({ providers, children }) => {
-  return createProvidersStack(providers, children, {});
-};
-
-export const ProvideContext = (ProvideContext: Provider | Provider[]) => (Component: React.ReactNode) => (props) => {
-  const providers = ProvideContext instanceof Array ? ProvideContext : [ProvideContext];
-  return createProvidersStack(providers, Component, props);
 };
 
 export default CreateContext;

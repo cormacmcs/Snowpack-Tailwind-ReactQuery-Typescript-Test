@@ -2,8 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { usePokemonList } from '@app/queries/usePokemon';
 import { ActionButton, AltButton } from '@app/elements/buttons';
-import { usePage, PageProvider } from '@app/contexts/pageContextB';
-import { useStyleState, StyleProvider, useStyle } from '@app/contexts/styleContextB';
+import { usePage } from '@app/contexts/pageContextB';
+import { useStyleState } from '@app/contexts/styleContextB';
 import PokemonView from '@app/components/pokemonView/pokemonView';
 
 interface IProps {}
@@ -46,6 +46,24 @@ export default function DashboardPage(props: IProps) {
   );
 }
 
-//  DashboardPage;
+// const createProvidersStack = (providers: Provider[], children, props, index: number = 0) => {
+//   const isFinalNode = index === providers.length - 1;
+//   const component = providers[index];
+//   if (!isFinalNode) {
+//     return React.createElement(component, createProvidersStack(providers, children, props, ++index));
+//   } else {
+//     return React.createElement(component, {
+//       ...(props || {}),
+//       children,
+//     });
+//   }
+// };
 
-// export default ProvideContext(StyleProvider)(DashboardPage);
+// export const MultiProvider: React.FC<MultiProviderProps> = ({ providers, children }) => {
+//   return createProvidersStack(providers, children, {});
+// };
+
+// export const ProvideContext = (ProvideContext: Provider | Provider) => (Component: React.ReactNode) => (props) => {
+//   const providers = ProvideContext instanceof Array ? ProvideContext : [ProvideContext];
+//   return createProvidersStack(providers, Component, props);
+// };

@@ -6,7 +6,8 @@ import RouteNavigator from '@app/navigation/routeNavigator';
 import appRoutes from '@app/navigation/appRoutes';
 import { PageProvider } from '@app/contexts/pageContextB';
 import { StyleProvider, useStyle, useStyleState } from '@app/contexts/styleContextB';
-import CombineProviders from '@app/contexts/CombineProviders';
+// import CombineProviders from '@app/contexts/CombineProviders';
+import { MultiProvider } from '@app/react-provide-context';
 import { Header } from '@app/elements/header';
 
 const queryClient = new QueryClient();
@@ -55,7 +56,9 @@ function App({}: AppProps) {
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <CombineProviders providers={[PageProvider, StyleProvider]}>
+        <MultiProvider providers={[PageProvider, StyleProvider]}>
+          {/* <PageProvider>
+          <StyleProvider> */}
           <AppWrapper>
             <Header>
               <h4>Pokemon</h4>
@@ -65,7 +68,9 @@ function App({}: AppProps) {
             </Header>
             <RouteNavigator appRoutes={appRoutes} />
           </AppWrapper>
-        </CombineProviders>
+          {/* </StyleProvider>
+        </PageProvider> */}
+        </MultiProvider>
       </QueryClientProvider>
     </BrowserRouter>
   );

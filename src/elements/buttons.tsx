@@ -26,10 +26,10 @@ export const AltButton = (props) => (
   <button
     className={classnames(
       roundedButton,
-      'bg-white',
+      props.toggled ? 'bg-blue-400' : 'bg-white',
       'border-2',
       'border-blue-500',
-      'text-blue-500',
+      props.toggled ? 'text-white' : 'text-blue-500',
       'hover:text-white',
       'hover:bg-blue-500'
     )}

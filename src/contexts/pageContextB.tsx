@@ -1,4 +1,4 @@
-import CreateContext from '@app/contexts/ContextCreator';
+import CreateContext from '@app/react-provide-context';
 
 type State = { pageA: number; pageB: string };
 
@@ -12,7 +12,6 @@ function pageReducer(state, action) {
     case 'setB': {
       return { ...state, pageB: action.value };
     }
-
     default: {
       throw new Error(`Unhandled action type`);
     }
