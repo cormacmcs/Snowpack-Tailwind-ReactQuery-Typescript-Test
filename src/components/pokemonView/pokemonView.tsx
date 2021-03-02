@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePokemonDetails } from '@app/queries/usePokemon';
 import { ProvideContext } from '@app/react-provide-context';
-import { StyleProvider } from '@app/contexts/styleContextB';
+import { StyleProvider } from '@app/contexts/styleContext';
 
 const PokemonView = ({ pokemon, shiny }: { pokemon: any; shiny?: boolean }) => {
   const { pokemonDetails, status, error } = usePokemonDetails(pokemon);

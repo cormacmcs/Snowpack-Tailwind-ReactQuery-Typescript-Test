@@ -4,8 +4,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter } from 'react-router-dom';
 import RouteNavigator from '@app/navigation/routeNavigator';
 import appRoutes from '@app/navigation/appRoutes';
-import { PageProvider } from '@app/contexts/pageContextB';
-import { StyleProvider, useStyle, useStyleState } from '@app/contexts/styleContextB';
+import { PageProvider } from '@app/contexts/pageContext';
+import { StyleProvider, useStyle, useStyleState } from '@app/contexts/styleContext';
 import { MultiProvider } from '@app/react-provide-context';
 import { Header } from '@app/elements/header';
 

@@ -2,8 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { usePokemonList } from '@app/queries/usePokemon';
 import { ActionButton, AltButton } from '@app/elements/buttons';
-import { usePage } from '@app/contexts/pageContextB';
-import { useStyleState } from '@app/contexts/styleContextB';
+import { usePage } from '@app/contexts/pageContext';
+import { useStyleState } from '@app/contexts/styleContext';
 import PokemonView from '@app/components/pokemonView/pokemonView';
 
 interface IProps {}

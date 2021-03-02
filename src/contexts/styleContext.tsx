@@ -1,17 +1,10 @@
-import * as React from 'react';
+import CreateContext from '@app/contexts/ContextCreator';
 
-type StyleProviderProps = { children: React.ReactNode };
-type Dispatch = (action: Action) => void;
-
-type Action = { type: 'toggleShiny' } | { type: 'toggleDark' };
 type State = { shiny: boolean; dark: boolean };
-
-const StyleStateContext = React.createContext<State | undefined>(undefined);
-const StyleDispatchContext = React.createContext<Dispatch | undefined>(undefined);
 
 const initialState: State = { shiny: false, dark: false };
 
-function styleReducer(state: State, action: Action) {
+function styleReducer(state: State, action): State {
   switch (action.type) {
     case 'toggleShiny': {
       return { ...state, shiny: !state.shiny };
@@ -25,33 +18,10 @@ function styleReducer(state: State, action: Action) {
   }
 }
 
-function StyleProvider({ children }: StyleProviderProps) {
-  const [state, dispatch] = React.useReducer(styleReducer, initialState);
-  return (
-    <StyleStateContext.Provider value={state}>
-      <StyleDispatchContext.Provider value={dispatch}>{children}</StyleDispatchContext.Provider>
-    </StyleStateContext.Provider>
-  );
-}
+const Context = CreateContext(initialState, styleReducer);
 
-function useStyleState() {
-  const context = React.useContext(StyleStateContext);
-  if (context === undefined) {
-    throw new Error('useStyleState must be used within a StyleProvider');
-  }
-  return context;
-}
-
-function useStyleDispatch() {
-  const context = React.useContext(StyleDispatchContext);
-  if (context === undefined) {
-    throw new Error('useStyleDispatch must be used within a StyleProvider');
-  }
-  return context;
-}
-
-function useStyle(): [State, Dispatch] {
-  return [useStyleState(), useStyleDispatch()];
-}
-
-export { StyleProvider, useStyleState, useStyleDispatch, useStyle };
+export const StyleProvider = Context.ContextProvider;
+export const useStyleState = Context.useContextState;
+export const useStyleDispatch = Context.useContextDispatch;
+export const useStyle = Context.useContextReducer;
+export default Context;
