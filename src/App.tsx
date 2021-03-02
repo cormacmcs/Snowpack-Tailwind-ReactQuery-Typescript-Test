@@ -6,7 +6,6 @@ import RouteNavigator from '@app/navigation/routeNavigator';
 import appRoutes from '@app/navigation/appRoutes';
 import { PageProvider } from '@app/contexts/pageContextB';
 import { StyleProvider, useStyle, useStyleState } from '@app/contexts/styleContextB';
-// import CombineProviders from '@app/contexts/CombineProviders';
 import { MultiProvider } from '@app/react-provide-context';
 import { Header } from '@app/elements/header';
 

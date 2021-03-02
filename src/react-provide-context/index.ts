@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ContextCreator from './ContextCreator';
+import ContextCreator, { assignMetaReducers } from './ContextCreator';
 
 interface MultiProviderProps {
   providers: any[];
@@ -22,7 +22,15 @@ const createProvidersStack = (providers: Provider[], children, props, index: num
         children,
       });
     } else {
-      return children(props);
+      if (!(typeof children === 'function')) {
+        // I don't think memo is working if used this way, but it stops it from throwing an error, need to look into future!!
+        console.warn(
+          'To use React.memo with ProvideContext wrap the ProvideContext HOC output with react memo, not the component being memoized'
+        );
+        return children.type(props);
+      } else {
+        return children(props);
+      }
     }
   }
 };
@@ -35,5 +43,6 @@ export const ProvideContext = (ProvideContext: Provider | Provider[]) => (Compon
   const providers = ProvideContext instanceof Array ? ProvideContext : [ProvideContext];
   return createProvidersStack(providers, Component, props, 0, true);
 };
+export const useMetaReducers = assignMetaReducers;
 
 export default ContextCreator;

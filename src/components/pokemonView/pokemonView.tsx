@@ -23,5 +23,4 @@ const PokemonView = ({ pokemon, shiny }: { pokemon: any; shiny?: boolean }) => {
   );
 };
 
-export default ProvideContext([StyleProvider])(React.memo(PokemonView));
-// export default PokemonView;
+export default React.memo(ProvideContext([StyleProvider])(PokemonView));

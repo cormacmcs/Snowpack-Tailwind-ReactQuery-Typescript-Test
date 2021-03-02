@@ -1,4 +1,4 @@
-import CreateContext from '@app/react-provide-context';
+import CreateContext from '@app/contexts/ContextCreator';
 
 type State = { shiny: boolean; dark: boolean };
 
